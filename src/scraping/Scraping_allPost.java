@@ -39,9 +39,9 @@ public class Scraping_allPost {
 
         System.out.println("---------Comida---------");
         Elements comida = doc1.select("div.restaurantTabContent-section");
-        System.out.println(comida.text());
+        System.out.println(comida.text().replace("€", "€\n"));
         System.out.println("---------Bebida---------");
         Elements bebidas = doc1.select("section.restaurantTabContent-section");
-        System.out.println(bebidas.text());
+        System.out.println(bebidas.text().replace("€", "€\n"));
     }
 }
