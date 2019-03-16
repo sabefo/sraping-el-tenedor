@@ -26,7 +26,6 @@ public class Scraping_allPost {
 			url = linkHref.substring(7, linkHref.indexOf("&"));
 		}
 
-        System.out.println(url);
         Connection response = Jsoup.connect(url).timeout(60000).ignoreContentType(true).ignoreHttpErrors(true);
         response.userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11");
         response.header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -35,13 +34,16 @@ public class Scraping_allPost {
         response.header("Accept-Language", "en-US,en;q=0.8");
         response.header("Connection", "keep-alive");
         
-        Document doc1 = response.get();
+        Document elTenedor = response.get();
 
-        System.out.println("---------Comida---------");
-        Elements comida = doc1.select("div.restaurantTabContent-section");
-        System.out.println(comida.text().replace("€", "€\n"));
-        System.out.println("---------Bebida---------");
-        Elements bebidas = doc1.select("section.restaurantTabContent-section");
-        System.out.println(bebidas.text().replace("€", "€\n"));
+        System.out.println("---------------------Comida---------------------");
+        Elements food = elTenedor.select("li.cardCategory");
+        Elements foodText = food.select("div.cardCategory-itemTitle");
+        Elements foodPrice = food.select("div.cardCategory-itemPrice");
+        String foodString = "";
+        for (int i = 0; i < foodText.size(); i++) {
+        	foodString += foodText.get(i).text() + " " +foodPrice.get(i).text() + "\n";
+		}
+		System.out.println(foodString);
     }
 }
