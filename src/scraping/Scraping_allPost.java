@@ -42,7 +42,7 @@ public class Scraping_allPost {
         Elements foodPrice = food.select("div.cardCategory-itemPrice");
         String foodString = "";
         for (int i = 0; i < foodText.size(); i++) {
-        	foodString += foodText.get(i).text() + " " +foodPrice.get(i).text() + "\n";
+        	foodString += foodPrice.get(i).text() + " " +foodText.get(i).text() + "\n";
 		}
 		System.out.println(foodString);
     }
